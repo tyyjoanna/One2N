@@ -2,7 +2,7 @@
 
 # One2N
 
-**Recursive residual refinement for high-resolution atmospheric forecasting**
+**One2N: recursive refinement extends AI weather forecasting to kilometre scales**
 
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](environment.yml)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.6-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
