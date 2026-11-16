@@ -65,5 +65,3 @@ Reference initial and target paths identify the same `real_residual_stats.pt`. R
 ## Time and output conventions
 
 `num_timesteps` includes decoded initialization. Final lead time is `(num_timesteps − 1) × input_step_hours`. A residual update occurs at every coupling interval, even with less frequent saving. `output_step_hours` must be a multiple of `input_step_hours`; the final update is always saved.
-
-Both schedules produce a native baseline, one fine forecast per selected valid time, and resolved run settings. Fine files contain five canonical variables, one valid time, original pressure order, descending latitude, and source units. Humidity is clipped only in physical outputs, leaving recurrent states unchanged.
