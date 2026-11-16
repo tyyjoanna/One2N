@@ -26,7 +26,7 @@ Scientific transformations are separate from orchestration. Model definitions co
 | `inference/pipeline.py` | Preparation, statistics, model loading, scheduling, and outputs |
 | Package `demo.py` | Generate random inputs and compare complete small-data runs |
 
-The installed package is used by both user commands and baseline subprocesses. Worker execution does not require adding the source directory to `sys.path`. Relative data paths are anchored to YAML through `paths.base_dir`. A real initialization comes from the caller or an explicit YAML field; source code does not choose an example date automatically.
+The installed package is used by both user commands and baseline subprocesses. Worker execution does not require adding the source directory to `sys.path`. Relative data paths are anchored to YAML through `paths.base_dir`.
 
 ## Two execution schedules
 
