@@ -59,20 +59,6 @@ Y[t+1]   = G(P[t+1]) + R[t+1]
 
 Output subsampling never omits residual updates. Input intervals must match `model.trained_step_hours`; a different interval requires a matching trained checkpoint, not merely a YAML edit.
 
-## Mapping from the original code
-
-| Original responsibility | Package implementation |
-| --- | --- |
-| `Swin_Unet.py` network | `models/swin_unet.py` |
-| Architecture and checkpoint loading | Configured factory in `models/checkpoint.py` |
-| `dataset.py` readers/interpolation | `data/io.py`, `data/regridding.py` |
-| `dataset.py` upstream forecast | `neuralgcm/rollout.py`, `worker.py`, `client.py` |
-| Driver statistics and tile layout | `data/statistics.py`, `inference/packing.py` |
-| Driver recurrence and saving | `inference/engine.py`, `outputs.py`, `pipeline.py` |
-| Machine-specific arguments | YAML and command overrides |
-
-The active network in `Swin_Unet_model_union.py` is equivalent to the standalone model; training and inactive experimental code are omitted. Persistent checkpoint entries remain, including inactive forward-path parameters. Debug barriers and unused fused branches are removed. The unreachable final-save condition and lost unit metadata are corrected explicitly.
-
 ## Extension boundaries
 
 Place new readers in `data/io.py`, output formats in `inference/outputs.py`, and baseline adapters in `neuralgcm/`. A different remapper, pressure grid, transform, attention backend, or coupling interval requires independent comparison. Synthetic examples validate execution paths, not atmospheric skill or manuscript evaluation.
