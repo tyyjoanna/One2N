@@ -28,8 +28,6 @@ Timestamp and identifier may occur in either filename order. The first sorted ma
 | `CI` | `128_031_ci` | `sea_ice_cover` | Fraction, 0–1 |
 | `SSTK` | `128_034_sstk` | `sea_surface_temperature` | K |
 
-`Z` is geopotential, not geopotential height. Convert units before loading when necessary. The code does not infer or convert units. Preserve `units` attributes; source field and pressure-level metadata are carried into forecasts.
-
 ### ERA5 auxiliary fields [ERA5 pressure-level data](https://doi.org/10.24381/cds.bd0915c6)
 
 The monthly file contains `ciwc` and `clwc`, in kg kg⁻¹. They are renamed to `specific_cloud_ice_water_content` and `specific_cloud_liquid_water_content`. Coordinates `valid_time` and `pressure_level` become `time` and `level`, with pressure sorted ascending. Their levels must match NeuralGCM's input grid. HRES pressure fields are interpolated to these levels linearly in log pressure with extrapolation.
