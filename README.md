@@ -16,9 +16,9 @@
 
 ## Overview
 
-This repository provides the preprocessing and inference implementation associated with [**One2N: Recursive refinement breaks the resolution barrier for Earth-system AI**](https://arxiv.org/abs/2611.12249). One2N evolves a fine-grid residual along a frozen coarse-model trajectory and adds the physical correction to the remapped baseline. The reference configuration couples a three-dimensional Swin-UNet to NeuralGCM.
+This repository provides the preprocessing and inference implementation associated with [**One2N: Recursive refinement breaks the resolution barrier for Earth-system AI**](https://arxiv.org/abs/2611.12249). One2N evolves a fine-grid residual along the trajectory of a frozen coarse-resolution parent model. At each step, the predicted residual is added to the remapped parent state to reconstruct the fine-grid forecast. The residual can represent both spatial refinement and correction of parent-model errors. The reference configuration couples a three-dimensional Swin-UNet to NeuralGCM.
 
-The release includes **inference, configuration, executable random-data examples, and tests**. Training and manuscript evaluation scripts are outside its scope. Weather observations, research weights, and normalization statistics are supplied separately.
+The release includes **inference, configuration, executable random-data examples, and tests**. Training and manuscript evaluation scripts are outside its scope. 
 
 ![One2N Framework](figure/one2n_framework.png)
 
@@ -26,13 +26,13 @@ The release includes **inference, configuration, executable random-data examples
 ```mermaid
 flowchart LR
     A[Initial atmospheric fields] --> B[Preprocessing]
-    B --> C[NeuralGCM baseline]
+    B --> C[NeuralGCM baseline parent model]
     A --> D[Initial fine residual]
     C --> D
     C --> E[Coarse temporal increments]
-    D --> F[One2N residual recurrence]
+    D --> F[One2N residual]
     E --> F
-    C --> G[Forecast reconstruction]
+    C --> G[Fine-grid state reconstruction]
     F --> G
     G --> H[Fine-grid NetCDF outputs]
     style C fill:#e8f0fe,stroke:#4285f4
@@ -130,7 +130,6 @@ demo_output/
 
 The dated run directory comes from the single synthetic epoch, `forecast.start_time`, in `configs/demo.yaml`. That timestamp anchors NetCDF time coordinates and test fixtures; it does not prescribe the date of a real forecast. Tests derive their file dates and expected valid times from this setting. The terminal reports checks and elapsed time. No weather downloads or trained research weights are required.
 
-On the Python 3.12.7 / Windows CPU validation host, a reference process completed this example in approximately **7 seconds after initial imports**, producing three matching forecast files per schedule and a `PASS` summary. The supplied profile performs three residual updates; runtime varies with hardware, configuration, and compilation caches.
 
 ## Real-data inference
 
@@ -219,15 +218,7 @@ Tests use generated fields, temporary files, and a frozen original-model referen
 
 [`tests/fixtures/original_model_reference.npz`](tests/fixtures/original_model_reference.npz) stores a small randomly initialized model state, a generated input, and the expected output produced by the original implementation. It detects numerical regressions when code changes. **Real inference and the random-data demo do not load this file.** It is required by the original-model regression test in the full suite, so it is retained here; removing it also requires updating that test. Fixture provenance is recorded in [`tests/fixtures/README.md`](tests/fixtures/README.md).
 
-All **26 automated tests passed against the installed wheel** in the local Python 3.12.7 / Windows CPU environment, without skipped tests. This includes explicit initialization-time handling. Streaming checks confirm that initialization is decoded without advancing the baseline and that each subsequent request advances exactly one coupling interval before One2N runs.
-
-The reference model retains all **197 parameter/buffer entries** in the supplied checkpoint. Original-model checks use small CPU cases; these do not establish full-resolution GPU or real-weather forecast equality. Read [Architecture](docs/architecture.md) for the numerical contract and [Reproducibility](docs/reproducibility.md) for validation scope and publication materials.
-
-## Upload and reuse
-
-The source directory can be uploaded to a GitHub repository as provided, including `.github/` and `.gitignore`. Running the demo requires only installation; running a real forecast additionally requires your paths, initialization, source weather fields, trained weights, and matching statistics. No source-code replacement is needed for the documented input format and model contract. If your data use different variable names or file conventions, adapt the reader or prepare the documented format.
-
-Publication-level replication additionally requires accessible research artifacts, an independent real-data case and expected outputs, and a maintained paper-associated version. Those external materials are not supplied by the source archive; see [Reproducibility](docs/reproducibility.md).
+Read [Architecture](docs/architecture.md) for the numerical contract and [Reproducibility](docs/reproducibility.md) for validation scope and publication materials.
 
 ## License and acknowledgements
 
