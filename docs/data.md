@@ -4,12 +4,6 @@
 
 The real-data pipeline requires initialization-time fields, matching One2N weights and statistics, and a NeuralGCM checkpoint. 
 
-## Locations and source access
-
-Set locations under `paths` in [`configs/inference.yaml`](../configs/inference.yaml). `base_dir` is relative to the YAML file; other relative paths resolve from that base. Absolute paths are accepted. The supplied `base_dir: ..` identifies the repository root.
-
-The preprint identifies [NCAR HRES dataset d113001](https://doi.org/10.5065/D68050ZV) and [ERA5 pressure-level data](https://doi.org/10.24381/cds.bd0915c6). Providers' access terms apply. Downloading source data does not replace the preparation and matching author statistics below. Research weights and statistics have no public download location assigned in this release.
-
 ## Input file convention
 
 All timestamps are **UTC**, and the exact initialization must exist. The real-data profile has no default initialization date: pass `--start-time` to `predict` and `check`, or set `forecast.start_time` in YAML to a time present in your data. The demo's synthetic epoch is not used as a fallback for real forecasts.
@@ -22,7 +16,7 @@ All timestamps are **UTC**, and the exact initialization must exist. The real-da
 
 Timestamp and identifier may occur in either filename order. The first sorted match is read, following the original loader. Keep one intended match per field and initialization.
 
-### HRES fields
+### HRES fields [NCAR HRES dataset d113001](https://doi.org/10.5065/D68050ZV)
 
 | File variable | Filename identifier | Internal name | Required unit |
 | --- | --- | --- | --- |
@@ -36,7 +30,7 @@ Timestamp and identifier may occur in either filename order. The first sorted ma
 
 `Z` is geopotential, not geopotential height. Convert units before loading when necessary. The code does not infer or convert units. Preserve `units` attributes; source field and pressure-level metadata are carried into forecasts.
 
-### ERA5 auxiliary fields
+### ERA5 auxiliary fields [ERA5 pressure-level data](https://doi.org/10.24381/cds.bd0915c6)
 
 The monthly file contains `ciwc` and `clwc`, in kg kg⁻¹. They are renamed to `specific_cloud_ice_water_content` and `specific_cloud_liquid_water_content`. Coordinates `valid_time` and `pressure_level` become `time` and `level`, with pressure sorted ascending. Their levels must match NeuralGCM's input grid. HRES pressure fields are interpolated to these levels linearly in log pressure with extrapolation.
 
