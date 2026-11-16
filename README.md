@@ -20,8 +20,6 @@ This repository provides the preprocessing and inference implementation associat
 
 The release includes **inference, configuration, executable random-data examples, and tests**. Training and manuscript evaluation scripts are outside its scope. Weather observations, research weights, and normalization statistics are supplied separately.
 
-![Uploading one2n_framework.png…]()
-
 
 
 ```mermaid
