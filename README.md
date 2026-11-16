@@ -196,7 +196,7 @@ Streaming never reinitializes NeuralGCM at each update. Both schedules preserve 
 
 ## Data and outputs
 
-**Weather data, One2N weights, normalization statistics, and the NeuralGCM checkpoint are not redistributed here.** Source access, exact file conventions, units, grids, pressure levels, and artifact roles are specified in [Data and artifacts](docs/data.md). No author-specific weight or statistics download link has been supplied for this source release.
+**Weather data, One2N weights, normalization statistics, and the NeuralGCM checkpoint are not redistributed here.** Source access, exact file conventions, units, grids, pressure levels, and artifact roles are specified in [Data and artifacts](docs/data.md). 
 
 Runs write to `paths.output/START_TIME/`:
 
