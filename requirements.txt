@@ -1,0 +1,10 @@
+# Python 3.12. Select the appropriate PyTorch accelerator build before installation.
+torch==2.6.0
+torchvision==0.21.0
+timm==1.0.15
+numpy==1.26.4
+scipy==1.14.1
+pandas==2.2.3
+xarray==2024.11.0
+netCDF4==1.7.2
+PyYAML==6.0.3

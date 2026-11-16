@@ -1,0 +1,54 @@
+# Runtime configuration; package installation is managed by setup.py.
+# base_dir is relative to this YAML file; other relative paths use base_dir.
+paths:
+  base_dir: ..
+  one2n_checkpoint: artifacts/checkpoint_latest.pt
+  neuralgcm_checkpoint: artifacts/neural_gcm_dynamic_forcing_deterministic_0_7_deg.pkl
+  stats_coarse: artifacts/low_residual_stats.pt
+  stats_initial: artifacts/real_residual_stats.pt
+  stats_target: artifacts/real_residual_stats.pt
+  hres_pressure: data/hres_pressure
+  hres_surface: data/hres_surface
+  era5_cloud: data/era5_cloud
+  output: results
+
+forecast:
+  # Supply initialization with --start-time, or add a quoted start_time here.
+  num_timesteps: 96        # Includes initialization: 95 correction updates.
+  input_step_hours: 2      # NeuralGCM-to-One2N coupling interval.
+  output_step_hours: 2     # Must be a multiple of input_step_hours.
+  schedule: batch          # batch or streaming
+
+runtime:
+  device: auto
+  jax_platform: cpu
+  epsilon: 1.0e-12
+  coordinate_tolerance: 1.0e-8
+
+model:
+  img_size: [25, 256, 512]
+  patch_size: [5, 16, 16]
+  in_chans: 505
+  embed_dim: 128
+  depths: [2, 4, 4, 2]
+  updown_sizes: [[1, 2, 2], [1, 2, 2]]
+  num_heads: [4, 4, 4, 4]
+  window_size: [5, 4, 4]
+  mlp_ratio: 4.0
+  qkv_bias: true
+  qk_scale: auto
+  drop_rate: 0.0
+  attn_drop_rate: 0.0
+  drop_path_rate: 0.1
+  ape: true
+  patch_norm: true
+  trained_step_hours: 2
+
+neuralgcm:
+  seed: 42
+  rollout_window: 30
+
+data:
+  pressure_levels_hpa: [1, 2, 3, 5, 7, 10, 20, 30, 50, 70, 100, 150, 200, 250, 300, 400, 500, 600, 700, 800, 850, 900, 925, 950, 1000]
+  fine_grid_shape: [2560, 5120]
+  latitude_spacing: gauss

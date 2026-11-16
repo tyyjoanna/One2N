@@ -1,0 +1,62 @@
+# Fully specified small random-data profile; no research artifacts are loaded.
+paths:
+  base_dir: ..
+  one2n_checkpoint: artifacts/checkpoint_latest.pt
+  neuralgcm_checkpoint: artifacts/neural_gcm_dynamic_forcing_deterministic_0_7_deg.pkl
+  stats_coarse: artifacts/low_residual_stats.pt
+  stats_initial: artifacts/real_residual_stats.pt
+  stats_target: artifacts/real_residual_stats.pt
+  hres_pressure: data/hres_pressure
+  hres_surface: data/hres_surface
+  era5_cloud: data/era5_cloud
+  output: demo_output
+
+forecast:
+  start_time: "2023072400"  # Synthetic test epoch only; not a required weather case.
+  num_timesteps: 4
+  input_step_hours: 2
+  output_step_hours: 2
+  schedule: batch
+
+runtime:
+  device: cpu
+  jax_platform: cpu
+  epsilon: 1.0e-12
+  coordinate_tolerance: 1.0e-8
+
+model:
+  img_size: [5, 16, 16]
+  patch_size: [1, 2, 2]
+  in_chans: 25
+  embed_dim: 8
+  depths: [2, 4, 4, 2]
+  updown_sizes: [[1, 2, 2], [1, 2, 2]]
+  num_heads: [2, 2, 2, 2]
+  window_size: [5, 2, 2]
+  mlp_ratio: 4.0
+  qkv_bias: true
+  qk_scale: auto
+  drop_rate: 0.0
+  attn_drop_rate: 0.0
+  drop_path_rate: 0.1
+  ape: true
+  patch_norm: true
+  trained_step_hours: 2
+
+neuralgcm:
+  seed: 42
+  rollout_window: 30
+
+data:
+  pressure_levels_hpa: [100, 300, 500, 700, 900]
+  fine_grid_shape: [32, 32]
+  latitude_spacing: gauss
+
+synthetic:
+  seed: 42
+  noise_std: 1.0
+  mean: 0.0
+  variance: 1.0
+  torch_threads: 1
+  atol: 2.0e-6
+  rtol: 2.0e-6

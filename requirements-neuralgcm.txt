@@ -1,0 +1,10 @@
+# Optional baseline and conservative-remapping dependencies.
+neuralgcm==1.1.2
+dinosaur==1.2.1
+jax==0.4.35
+jaxlib==0.4.35
+dm-haiku==0.0.13
+chex==0.1.88
+optax==0.2.4
+tensorflow-probability==0.25.0
+xarray-tensorstore==0.3.0
