@@ -30,36 +30,6 @@ The installed package is used by both user commands and baseline subprocesses. W
 
 ## Two execution schedules
 
-```mermaid
-sequenceDiagram
-    participant P as Pipeline
-    participant W as Baseline worker
-    participant E as One2N engine
-    participant O as Output writer
-    P->>W: Initialization and configured controls
-    W->>W: Encode once; persist initial forcing
-    W-->>P: Decoded P0 and initial fine residual
-    alt batch
-        P->>W: Remaining baseline trajectory
-        W-->>P: P1 through final state
-        Note over W: Closes before residual inference
-    else streaming
-        Note over W: Remains available between residual updates
-    end
-    loop Every coupling interval
-        opt streaming
-            P->>W: Request one next state
-            W-->>P: Next decoded state
-        end
-        P->>E: Coarse increment and preceding residual
-        E-->>P: Replacement residual state
-        opt Output interval or final update
-            P->>O: Physical residual and matching baseline
-            O-->>P: Forecast NetCDF
-        end
-    end
-```
-
 Batch retains the original execution order: prepare the baseline, then run One2N. `neuralgcm.rollout_window` controls integration batches without restarting state. Streaming interleaves one baseline update and one residual update, keeping the encoded state in a persistent process. The parent requests another baseline state only after the current residual update and due output finish. Initialization is never repeated at each step.
 
 Streaming decodes `P0` directly without advancing. Each later request uses one upstream unroll interval with `start_with_input=False`, returning the newly advanced state without computing a future decoded state. Batch mode retains the original windowed `start_with_input=True` route. Controlled-model tests verify their state times and requested advance counts.
