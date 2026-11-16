@@ -2,7 +2,7 @@
 
 [← README](../README.md) · [Architecture](architecture.md) · [Reproducibility](reproducibility.md)
 
-The real-data pipeline requires initialization-time fields, matching One2N weights and statistics, and a NeuralGCM checkpoint. No future HRES observations are required.
+The real-data pipeline requires initialization-time fields, matching One2N weights and statistics, and a NeuralGCM checkpoint. 
 
 ## Locations and source access
 
