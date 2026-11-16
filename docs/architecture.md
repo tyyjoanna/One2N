@@ -34,8 +34,6 @@ Batch retains the original execution order: prepare the baseline, then run One2N
 
 Streaming decodes `P0` directly without advancing. Each later request uses one upstream unroll interval with `start_with_input=False`, returning the newly advanced state without computing a future decoded state. Batch mode retains the original windowed `start_with_input=True` route. Controlled-model tests verify their state times and requested advance counts.
 
-The worker uses the same interpreter. Temporary files transfer arrays; logs are separate from protocol messages. Child failures surface to the caller. Parent-side remapping uses CPU JAX. A streaming baseline remains alive during One2N, so a shared accelerator must hold both runtimes; CPU JAX is the supplied default.
-
 ## Scientific invariants
 
 Let `P0 … P[N−1]` be the baseline, including decoded initialization, and `G` conservative fine-grid remapping.
