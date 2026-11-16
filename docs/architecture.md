@@ -59,6 +59,3 @@ Y[t+1]   = G(P[t+1]) + R[t+1]
 
 Output subsampling never omits residual updates. Input intervals must match `model.trained_step_hours`; a different interval requires a matching trained checkpoint, not merely a YAML edit.
 
-## Extension boundaries
-
-Place new readers in `data/io.py`, output formats in `inference/outputs.py`, and baseline adapters in `neuralgcm/`. A different remapper, pressure grid, transform, attention backend, or coupling interval requires independent comparison. Synthetic examples validate execution paths, not atmospheric skill or manuscript evaluation.
