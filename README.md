@@ -18,7 +18,7 @@
 
 This repository provides the preprocessing and inference implementation associated with [**One2N: Recursive refinement breaks the resolution barrier for Earth-system AI**](https://arxiv.org/abs/2611.12249). One2N evolves a fine-grid residual along the trajectory of a frozen coarse-resolution parent model. At each step, the predicted residual is added to the remapped parent state to reconstruct the fine-grid forecast. The residual can represent both spatial refinement and correction of parent-model errors. 
 
-The release includes **inference, configuration, executable random-data examples, and tests**. Training and manuscript evaluation scripts are outside its scope. 
+The release includes **inference, configuration, executable random-data examples, and tests**. 
 
 ![One2N Framework](figure/one2n_framework.png)
 
