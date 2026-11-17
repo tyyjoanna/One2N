@@ -28,7 +28,7 @@ The demonstration exercises configuration, the configured small Swin-UNet, norma
 
 Tests also cover original-model regression, strict parameter loading, file schemas, latent-state continuity, process transfer, output frequency, times, units, and output-only humidity clipping. Full model geometry can be checked without allocating a complete forecast tensor.
 
-The frozen `tests/fixtures/original_model_reference.npz` is a compact regression fixture: random small-model state, synthetic input, and the corresponding original-model output. Neither the real forecast path nor `demo.py` reads it. It is optional for running inference but needed to execute the full test suite unchanged. Its provenance is documented in [`tests/fixtures/README.md`](../tests/fixtures/README.md); it is not a research checkpoint or weather dataset.
+The frozen `tests/fixtures/original_model_reference.npz` is a compact regression fixture: random small-model state, synthetic input, and the corresponding original-model output. It is optional for running inference but needed to execute the full test suite unchanged. Its provenance is documented in [`tests/fixtures/README.md`](../tests/fixtures/README.md); it is not a research checkpoint or weather dataset.
 
 The real-data YAML has no built-in initialization date. The caller supplies one through `--start-time` or an explicit YAML setting. The demo YAML retains one synthetic epoch, from which fixtures and expected times are derived. Calendar strings in file naming conventions identify required input/output formats, rather than fixed forecast dates.
 
