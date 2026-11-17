@@ -76,8 +76,6 @@ one2n-release/
 └── LICENSE                      # MIT license and upstream notice
 ```
 
-Data, artifact, and result directories are created when needed and excluded from version control. The uploaded source tree contains no empty data directories.
-
 ## Installation
 
 Use **Python 3.12**. PyTorch executes One2N; JAX, NeuralGCM, and Dinosaur provide the baseline and conservative remapping. Dependency versions are recorded in [`requirements.txt`](requirements.txt) and [`requirements-neuralgcm.txt`](requirements-neuralgcm.txt). [`setup.py`](setup.py) supplies the Python installation metadata. **Edit YAML in `configs/` for run settings and `environment.yml` for the Conda environment**.
