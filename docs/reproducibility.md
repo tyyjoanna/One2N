@@ -32,7 +32,6 @@ The frozen `tests/fixtures/original_model_reference.npz` is a compact regression
 
 The real-data YAML has no built-in initialization date. The caller supplies one through `--start-time` or an explicit YAML setting. The demo YAML retains one synthetic epoch, from which fixtures and expected times are derived. Calendar strings in file naming conventions identify required input/output formats, rather than fixed forecast dates.
 
-These checks do not establish atmospheric skill, real NeuralGCM agreement across schedules, or manuscript metrics. Random demonstration weights are not a trained research model.
 
 ## Materials external to this archive
 
