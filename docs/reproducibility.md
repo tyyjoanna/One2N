@@ -33,19 +33,6 @@ The frozen `tests/fixtures/original_model_reference.npz` is a compact regression
 The real-data YAML has no built-in initialization date. The caller supplies one through `--start-time` or an explicit YAML setting. The demo YAML retains one synthetic epoch, from which fixtures and expected times are derived. Calendar strings in file naming conventions identify required input/output formats, rather than fixed forecast dates.
 
 
-## Materials external to this archive
-
-| Material | Current availability |
-| --- | --- |
-| Weather initialization | Obtain from documented providers; prepare the required schema |
-| NeuralGCM checkpoint | Obtain from the official project under its terms |
-| Trained One2N checkpoint | Not redistributed; no public download location supplied |
-| Matching statistics | Not redistributed; must accompany the trained weights |
-| Training/manuscript evaluation scripts | Outside this inference release |
-| Independent real-data reference outputs | Not included or validated here |
-| Code archive DOI | Not assigned to this local archive |
-| Hosted CI result | Available after upload and workflow execution |
-
 ## Publication use
 
 Nature's [code and software guidance](https://media.nature.com/full/nature-cms/documents/GuidelinesCodePublication.pdf) requests versioned source, installation details, an example with expected behavior and timing, and licensing. Publication also requires access to supporting materials and maintenance of the paper-associated version. Editors and reviewers determine the final acceptable release.
